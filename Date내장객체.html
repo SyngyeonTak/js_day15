@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function showTime(){
+            var d1 = new Date();
+            var days = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
+            //개발자가 인스턴스만 생성할 경우, 현재 날짜 정보를 보유하게 됨
+            console.log(d1);//객체는 문자열은 아니지만, 출력명령을 만나면 자동으로 문자화된다.
+
+            //날짜 객체자체는 우리가 원하는 형식(포맷)은 아니므로.
+            //친근한 형식으로 출력하려면, 날짜객체가 보유한 각종 메서드를 이용하면 된다.
+
+            //개발언어가 보유한 객체나 함수등에 대한 참조문서를 가리켜 API Dcoument
+            //참고) API Application Programming Interface(프로그래밍 조작법)
+            //년도 추출
+            var yy = d1.getFullYear();
+            console.log("현재 연도는 %d", yy);
+            
+            var mm = d1.getMonth(); //주의!! 월은 0부터 시작한다!!(0-11)
+            console.log("이번달은 %d월입니다.", mm+1);//디자인에 표현할 때는 +1을 해주자!!
+
+            var dd = d1.getDate();
+            console.log("오늘은 %d일입니다.", dd);
+
+            var day = d1.getDay(); //주의! 요일은 0부터 시작한다(0-6)
+            console.log("오늘은 %s입니다.", days[day]);
+
+            //5일 뒤엔 며칠일까?
+            //현재 날짜 객체를 원하는 날짜로 조작!!
+            var d2 = d1.setDate(d1.getDate()+100);
+            console.log("그때는 ", d1.getDate(), "이며, 요일은 ", days[d1.getDay()]);
+
+        }
+
+        showTime();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

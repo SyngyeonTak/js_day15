@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrapper{
+            width: 700px;
+            height: 600px;
+            background: yellow;
+            position: relative;
+            overflow: hidden;
+            margin: auto;
+            border: 2px solid red;
+        }
+
+        .regist-area{
+            width:200px;
+            height: 100%;
+            background: pink;
+            position:absolute;
+            left:0px;
+        }
+
+        #result-area{
+            width:500px;
+            height: 100%;
+            position: absolute;
+            left:200px;
+        }
+        input[type='text']{
+            padding: 6px;
+            margin: 5px 5px;
+        }
+        button{
+            margin: 0px 5px 0px 5px;
+            width: 80px;
+            padding: 6px;
+        }
+    </style>
+    <script>
+        var id, n, pass; //text박스
+        var memberArray = new Array(); //회원객체들을 모아놓을 1차원 배열..
+        
+        function regist(){
+            //아이디, 패스워드, 이름
+
+            //지금까지는 일차원배열에 데이터를 보관했으나, 아무래도 index(0, 1, 2..순번)를 이용하다 보니
+            //직관성이 떨어진다.. 따라서 객체지향언어에서는 데이터에 대한 보관을 보다 직관성을 높이기 위한
+            //객체를 이용한다.
+
+            var member = {
+                uid: id.value,
+                uname: n.value,
+                upass: pass.value
+            }
+
+            // var member = [id.value, name.value, pass.value];
+
+            memberArray.push(member); //json을 배열에 탑재!!
+            printData();
+        }
+
+        function printData(){
+            var area = document.getElementById("result-area");
+            var str = "<table width = '100%' border = '1px'>";
+            for(var i=0; i<memberArray.length; i++){
+                var member = memberArray[i];
+                str += "<tr>";
+                str += "<td>"+member.uid+"</td>";
+                str += "<td>"+member.upass+"</td>";
+                str += "<td>"+member.uname+"</td>";
+                str += "</tr>";
+            }
+            str += "</table>";
+            area.innerHTML = str;
+
+        }
+
+        function init(){
+            id = document.getElementById("id");
+            n = document.getElementById("n");
+            pass= document.getElementById("pass");
+        }
+
+        window.addEventListener("load", function(){
+            init();
+        });
+
+    </script>
+</head>
+<body onload = "init()">
+    <div class = "wrapper">
+        <div class = "regist-area">
+            <!-- 버튼에 의한 무조건적인 전송방지
+            방지안하게되면, 새로고침때문에 페이지가 갱신 -->
+            <form onSubmit = "event.preventDefault()">
+                <input id = "id" type = "text" placeholder = "ID입력..."/>
+                <input id = "pass" type = "text" placeholder = "Password입력..."/>
+                <input id = "n" type = "text" placeholder = "Name입력"/>
+                
+                <button onClick = "regist()">등록</button>
+                <button type onclick = "remove()">지우기</button>
+            </form>
+        </div>
+        <div id = "result-area">등록된 결과표 나올 영역</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #myMap{
+            width: 1000px;
+            height: 800px;
+            background: yellow;
+        }
+    </style>
+    <script>
+        var myMap;
+        var latLngArr = [
+            ["37.494467", "127.017907"],
+            [ "37.510383", "127.079817"],
+            [ "37.519537",  "127.041974"],
+            ["37.482345",  "127.070178"],
+            [ "37.497562", "127.060071"]
+         ]
+         var picArr = ["../img/food/pizza.png", "../img/food/hamburgur.png", "../img/food/chicken.png", "../img/food/popcorn.png", "../img/food/soup.png"]
+
+         var markerArr = new Array(5);
+            function init(){
+            myMap = document.getElementById("myMap");
+            var mapProp = {//클래스없이 일회성 객체를 만듬
+                                    //주의! =대신 :(콜론)를 쓴다(Javascript Object Notation)-JSON
+                center: new google.maps.LatLng(latLngArr[0][0], latLngArr[0][1]),
+                zoom:13
+            };
+            
+            //구글맵 객체 생성
+            var map = new google.maps.Map(myMap, mapProp);//그려질 div, 옵션
+            
+            //마커생성
+            for(var i = 0; i<markerArr.length; i++ ){
+            markerArr[i] = new google.maps.Marker({
+                position:  new google.maps.LatLng(latLngArr[i][0], latLngArr[i][1]),
+                animation: google.maps.Animation.BOUNCE,
+                icon: {
+                    url: picArr[i],
+                    scaledSize: new google.maps.Size(70, 70)
+                }
+            });
+
+                markerArr[i].setMap(map);//마커를 적용할 맵 객체
+            }
+
+            //마커에 클릭이벤트 부여하기
+            google.maps.event.addListener(marker, "click", function(){
+                map.setZoom(20);
+                //정보창 띄우기
+                var pop= new google.maps.InfoWindow({
+                    content:"AI is alive"
+                });
+    
+                pop.open(map, marker);
+            });
+
+        }
+        </script>
+</head>
+<body>
+    <div id = "myMap">구글 지도 나올 예정</div>
+</body>
+</html>
+<script src="https://maps.googleapis.com/maps/api/js?key=&callback=init"></script>

@@ -1,0 +1,15 @@
+<script>
+    var yy1 = parseInt(prompt("원하는 연도를 입력하세요"));
+    var mm1 = parseInt(prompt("원하는 월을 입력하세요"));
+    var dd1 = parseInt(prompt("원하는 날짜를 입력하세요"));
+
+
+    var d1 = new Date();
+    var days = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"]
+
+    var yy = d1.setFullYear(yy1);
+    var mm = d1.setMonth(mm1-1);
+    var dd = d1.setDate(dd1);
+
+    alert("그날은 "+days[d1.getDay()]+"입니다");
+</script>
